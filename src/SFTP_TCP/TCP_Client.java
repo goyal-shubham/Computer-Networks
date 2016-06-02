@@ -75,7 +75,7 @@ public class TCP_Client {
                     {
                         remainingBytes[i] = (char) myBuffer[i];
                     }
-                    message = new String();
+                    message = new String(remainingBytes);
                     System.out.println(message);
                     out.println(message);
                 }
