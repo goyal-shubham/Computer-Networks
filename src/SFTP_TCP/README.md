@@ -12,4 +12,4 @@ The server needs to know when the transmission is over so that it can close the 
 
 The preferred language to be used is C/C++ and Linux (any Unix will do it!) but Java will also be accepted. You will need to use the socket library. The man pages in the Unix/Linux systems have a lot of useful information. Start with <man socket>. There is a man page for each function in the socket library.
 
-Your SFTP should be able to transfer binary files as well as text files.
+Algorithm SFTP is able to transfer binary files as well as text files.
