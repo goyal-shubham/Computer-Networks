@@ -1,3 +1,4 @@
+#  SFTP - Reliable Transfer over an Unreliable Channel with Bit Errors that can also loose packets
 
 The project consists of building a Stop and Wait (S&W) reliable protocol. The S&W is built on top of UDP, and it is
 supposed to provide a reliable transport service to the SFTP application.Messages are sent one at a time, and each
