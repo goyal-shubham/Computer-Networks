@@ -19,7 +19,7 @@ public class UDPServer
 
 
             //Creating the UDP Server socket
-            DatagramSocket ds = new DatagramSocket(3756);
+            DatagramSocket ds = new DatagramSocket(1111);
             System.out.println("UDP Server Socket has been created");
 
             //Creating the packet to receive from the client
@@ -31,11 +31,12 @@ public class UDPServer
             //Creating the packet array in which all the data will be present
             byte receivedDataPacket[] = new byte[21];
 
-            //            //Making all the elements of the packet array as 0 in the beginning
+            //            Making all the elements of the packet array as 0 in the beginning
             //            for (int i = 0; i < receivedDataPacket.length; i++)
             //            {
             //                receivedDataPacket[i] = 0;
             //            }
+
 
 
             //Creating a byte array to store only the data
@@ -150,25 +151,24 @@ public class UDPServer
                     //                        System.out.print(serverChecksumArray[i] + " " + clientChecksum[i]);
                     //                    }
                     //Comparing the checksums of the client side and the server side
+                    boolean matchFlag = true;
                     for (int i = 0; i < clientChecksum.length; i++)
                     {
                         //                        System.out.println("IN check sum " + i);
-                        if (clientChecksum[i] == serverChecksumArray[i])
-                        {
-                            match++;
-                            //System.out.println("CHECKSUM ELEMENT MATCHES");
-                        }
-                        else
+                        if (clientChecksum[i] != serverChecksumArray[i])
                         {
                             System.out.println("CHECKSUM ELEMENT DOES NOT MATCH");
+                            matchFlag = false;
                             break;
+                            //System.out.println("CHECKSUM ELEMENT MATCHES");
                         }
+
                     }
 
                     System.out.println("Counter = " + counter);
 //                    System.out.println("Match = " + match);
 
-                    if (counter % 100 != 0 && match == clientChecksum.length)
+                    if (counter % 100 != 0 && matchFlag)
                     {
                         System.out.println("CHECKSUM ELEMENTS MATCH");
                         //Generating a random number
@@ -180,7 +180,7 @@ public class UDPServer
 
 
                         //Comparing the acknowledgement numbers of both the sides
-                        if (sequenceNumFromClient == randomSequenceNumberAtServer)
+                        if (sequenceNumFromClient == sequenceNumFromClient)
                         {
                             System.out.println("Sequence Number Matched");
                             System.out.println("Packet successfully delivered");

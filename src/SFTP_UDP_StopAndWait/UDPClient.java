@@ -14,6 +14,7 @@ import java.util.zip.Checksum;
 public class UDPClient
 {
     public static final int TIMEOUT_TIME = 2000;
+    static int PORT = 1111;
 
     public static void main(String[] args) throws InterruptedException
     {
@@ -25,8 +26,7 @@ public class UDPClient
             //To count the packets and number of resends.
             int totalPackets = 0, resendCount = 0;
 
-           // System.out.println("Enter the port number");
-            int port = 3756;
+           // System.out.println("Enter the PORT number");
 
             System.out.println("Enter the name of input file");
             String input = sc.next();
@@ -35,10 +35,12 @@ public class UDPClient
             FileInputStream fis = new FileInputStream(file);
 
 
-            //Creating a socket and connecting to the port and inetAddress
+            //Creating a socket and connecting to the PORT and inetAddress
             DatagramSocket ds = new DatagramSocket();
+
             InetAddress ia = InetAddress.getLocalHost();
-            ds.connect(ia, port);
+            ds.connect(ia, PORT);
+
             System.out.println("UDP Client Socket has been created");
 
 
@@ -83,6 +85,7 @@ public class UDPClient
                 //Sending a packet to inform server about bytes to send from client
                 byte[] dataRead = new byte[1];
                 dataRead[0] = (byte) bytesRead;
+
                 System.out.println("Read " + bytesRead + " bytes from file");
                 DatagramPacket sendByteCount = new DatagramPacket(dataRead, 1);
                 ds.send(sendByteCount);
@@ -146,13 +149,15 @@ public class UDPClient
 
                 while (flag)
                 {
-
                     //Printing the Datagram packet values
+
                     System.out.println("Packet to send:");
+
                     for (int pack = 0; pack < dataToSend.length; pack++)
                     {
                         System.out.print(dataToSend[pack] + "\t");
                     }
+
                     System.out.println();
 
                     //Sending the constructed packet to the server side
